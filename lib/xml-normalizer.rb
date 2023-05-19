@@ -44,7 +44,7 @@ class XMLNormalizer
     result = []
     node_set.each do |node|
       namespaces = nss.dup
-      _t = node.class.new(node.text? ? node.to_s : node.name, target)
+      _t = node.class.new(node.text? ? node.to_s : node.name, Nokogiri::XML::Document.new(target))
       ns1 = _t.namespace = _t.add_namespace_definition(namespaces[node.namespace.href], node.namespace.href) if node.namespace
       if !(attrs = sort_helper(node, doc, namespaces)).empty?
         attrs.each do |object|
